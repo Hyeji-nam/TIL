@@ -128,13 +128,13 @@ console.log(a === b) // false
 // 불일치
 console.log(a !== b) // true
 
-// 큼
+// 큼(greater than)
 console.log(a > b) // false
 
 // 크거나 같음
 console.log(a >= b) // false
 
-// 작음
+// 작음(less than)
 console.log(a < b) // true
 
 // 작거나 같음
@@ -145,6 +145,9 @@ console.log(a <= b) // true
 
 ```js
 // AND 연산자
+// 그리고 연산자는
+// 제일 먼저 만나는 거짓 데이터를 반환
+// 모두 참일 경우 마지막 데이터를 반환
 const a = true
 const b = false
 
@@ -181,7 +184,7 @@ console.log('A' && 'B' && '') // ''
 console.log('A' && 'B' && 'C') // 'C'
 ```
 
-OR 연산자는 왼쪽에서부터 가장 먼저 만나는 참(Truthy) 데이터를 반환합니다.  
+OR 연산자는 왼쪽에서부터 가장 먼저 만나는 <u>참(Truthy) 데이터</u>를 반환합니다. 
 끝까지 참이 없으면 가장 오른쪽의 마지막 거짓(Falsy) 데이터를 반환합니다.
 
 ```js
@@ -220,7 +223,7 @@ console.log(false ?? 1 ?? 2) // false
 console.log(0 ?? 1 ?? 2) // 0
 ```
 
-## 삼항(Ternary)
+## 삼항(Ternary) (중요!!)
 
 ```js
 const a = 1
@@ -236,6 +239,7 @@ console.log(a < 2 ? '참!' : '거짓..')
 ```
 
 ```js
+// message: undefined(암시적)
 function getAlert(message) {
   return message ? message : '메시지가 존재하지 않습니다!'
 }
@@ -244,7 +248,7 @@ console.log(getAlert('안녕하세요~')) // '안녕하세요~'
 console.log(getAlert()) // '메시지가 존재하지 않습니다!'
 ```
 
-## 전개 연산자(Spread Operator)
+## 전개 연산자(Spread Operator) (사용 多)
 
 배열이나 객체의 아이템이나 속성을 전개(확장)할 수 있습니다.  
 얕은 복사에 유용합니다.
@@ -255,6 +259,7 @@ console.log(getAlert()) // '메시지가 존재하지 않습니다!'
 const a = [1, 2, 3]
 const b = [4, 5, 6]
 const c = a.concat(b)
+// 배열 리터럴 방식
 const d = [...a, ...b]
 
 console.log(c) // [1, 2, 3, 4, 5, 6]
@@ -266,6 +271,7 @@ console.log(d) // [1, 2, 3, 4, 5, 6]
 ```js
 const a = { x: 1, y: 2 }
 const b = { y: 3, z: 4 }
+// a, b 객체의 내용을 병합해서 새로운 객체 생성
 const c = Object.assign({}, a, b)
 const d = { ...a, ...b }
 
@@ -288,6 +294,7 @@ fn(...a)
 
 ```js
 const a = [1, 2, 3, 4, 5, 6]
+// ...rest : 나머지 매개변수
 function fn(x, y, ...rest) {
   console.log(x, y, rest)
 }
@@ -304,6 +311,7 @@ fn(...a)
 #### 기본
 
 ```js
+// 배열 데이터는 순서가 존재, 객체는 X
 const arr = [1, 2, 3]
 const [a, b, c] = arr
 
@@ -326,6 +334,7 @@ console.log(a, b, c)
 
 ```js
 const arr = [, , 3]
+// 기본값을 지정할 땐 '=' 사용
 const [a = 0, b, c] = arr
 
 console.log(a, b, c)
