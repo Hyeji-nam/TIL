@@ -70,6 +70,7 @@ class User {
     this.firstName = first
     this.lastName = last
   }
+  // 메소드 함수를 만들 때는 일반 함수로 만들기, 화살표 함수 X
   getFullName() {
     return `${this.firstName} ${this.lastName}`
   }
@@ -109,15 +110,16 @@ console.log(heropy.getFullName === neo.getFullName) // false
 ```js
 class User {
   constructor(first, last) {
-    this.firstName = first
+    this.firstName = first // 데이터
     this.lastName = last
   }
   // Getter
   get fullName() {
-    return `${this.firstName} ${this.lastName}`
+    return `${this.firstName} ${this.lastName}` // 계산된 데이터
   }
-  // Setter
+  // Setter(getter에 값을 할당하려고 할 때 사용)
   set fullName(value) {
+    // ; : 문제가 생길 여지를 방지
     ;[this.firstName, this.lastName] = value.split(' ')
   }
 }
@@ -141,7 +143,8 @@ console.log(neo.fullName) // 'Smith John'
 ## 정적 메소드(Static methods)
 
 정적 메소드는 주로 클래스의 유틸리티(보조) 함수를 만들 때 사용합니다.  
-인스턴스와는 연결되지 않으며, 클래스 자체에서 호출해야 합니다.
+인스턴스와는 연결되지 않으며, 클래스 자체에서 호출해야 합니다.  
+object는 거의 정적 메소드
 
 `isArray mdn` 구글 검색!
 
