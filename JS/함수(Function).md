@@ -208,16 +208,32 @@ const log = c => console.log(c)
 
 ```js
 const a = () => {} // 매개변수가 없을 경우
+// const a = function () {}
+
 const b = x => {} // 매개변수 1개는 소괄호 생략 가능
-const c = (x, y) => {} // 매개변수가 없거가 2개 이상은 소괄호를 생략 불가
+// const b = (x) => {}
+// const b = function (x) {}
+
+const c = (x, y) => {} // 매개변수가 없거나 2개 이상은 소괄호를 생략 불가
+// const c = function (x, y) {}
+
 const d = x => { return x * x } 
 const e = x => x * x // 함수가 `return`으로 시작하면 `{}`와 `return` 생략 가능
-const f = x => { // 함수가 `return`으로 시작하지 않으면 생략 불가
+// const de = function (x) {return x * x}
+
+const f = x => { 
+  // 함수가 `return`으로 시작하지 않으면 생략 불가
   console.log(x * x)
   return x * x
 }
+// const f = function (x) {
+//  console.log(x * x)
+//  return x * x
+//}
 const g = () => { return { a: 1 } }
-const h = () => ({ a: 1 }) // 객체 데이터는 `{}` 기호를 사용하기 때문에 소괄호로 묶어야 함
+const h = () => ({ a: 1 }) 
+// 객체 데이터는 `{}` 기호를 사용하기 때문에 소괄호로 묶어야 함
+
 const i = () => { return [1, 2, 3] }
 const j = () => [1, 2, 3]
 ```
@@ -419,16 +435,16 @@ const literal = {
   b: 2,
   // 일반 함수는 호출 위치에서 따라 this 정의!
   c: function () {
-    console.log(this.a)
+    console.log(this.a) 
   },
   // 화살표 함수는 this가 자신이 선언된 렉시컬(함수) 범위에서 this 정의!
   d: () => {
-    console.log(this.a)
+    console.log(this.a) // this는 window 객체
   }
 }
 literal.c() // 1
 literal.d() // undefined
-newC = literal.c
+newC = literal.c // getter (값을 얻어내는 용도)
 newD = literal.d
 newC() // undefined
 newD() // undefined
@@ -487,14 +503,14 @@ const amy = {
 
 // call
 console.log(
-  amy.getName.call(heropy, 85)
+  amy.getName.call(heropy, 85) // 빌려주면서 바로 호출
 )
 // apply
 console.log(
-  amy.getName.apply(heropy, [85])
+  amy.getName.apply(heropy, [85]) // 빌려주면서 바로 호출
 )
 // bind
-const heropysGetName = amy.getName.bind(heropy)
+const heropysGetName = amy.getName.bind(heropy) // 빌려주기만 함, 따로 호출해야 함
 console.log(heropysGetName(85))
 ```
 
