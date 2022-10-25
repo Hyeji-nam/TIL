@@ -575,11 +575,11 @@ console.log(new Date().toISOString())
 ```js
 const time = new Date().getTime()
 console.log(Date.now()) // 1664349597861
-console.log(time) // 1664349597861
+console.log(time)       // 1664349597861
 
 setTimeout(() => {
   console.log(Date.now()) // 1664349598861
-  console.log(time) // 1664349597861
+  console.log(time)       // 1664349597861
 }, 1000)
 ```
 
