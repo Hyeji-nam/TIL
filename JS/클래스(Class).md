@@ -399,6 +399,8 @@ class Fonty {
       fontFamily: 'sans-serif',
       lineHeight: '1.4'
     }
+
+    // 언더바 : 밖에서 사용 금지
     this._allowedProperties = ['fontSize', 'fontStyle', 'fontWeight', 'fontFamily', 'lineHeight']
     this._selector = selector
     this.setStyle(customOptions)
