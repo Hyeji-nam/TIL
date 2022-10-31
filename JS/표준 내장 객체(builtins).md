@@ -620,6 +620,7 @@ console.log(arr.at(-1)) // 'C'
 const arr1 = ['A', 'B', 'C']
 const arr2 = ['D', 'E', 'F']
 const arr3 = arr1.concat(arr2)
+// 전개 연산자
 // const arr3 = [...arr1, ...arr2]
 
 console.log(arr1) // ['A', 'B', 'C']
@@ -647,6 +648,7 @@ console.log(isValid) // true
 const numbers = [1, 20, 7, 9, 104, 0, 58]
 const filteredNumbers = numbers.filter(number => number < 30)
 
+// filter 메소드는 원본 데이터보다 개수가 작을 수 있다.
 console.log(filteredNumbers) // [1, 20, 7, 9, 0]
 ```
 
@@ -761,7 +763,8 @@ for (let i = 0; i < arr.length; i += 1) {
 
 ### .includes()
 
-대상 배열이 특정 요소를 포함하고 있는지 확인합니다.
+대상 배열이 특정 요소를 포함하고 있는지 확인합니다.  
+주로 원시형 데이터를 찾는 용도로 쓰임.
 
 ```js
 const arr = [1, 2, 3]
@@ -782,6 +785,7 @@ const users = [
   { name: 'Amy', age: 22 },
   { name: 'Lewis', age: 11 }
 ]
+// 생성 위치가 다름
 console.log(users.includes({ name: 'Neo', age: 85 })) // false
 
 const neo = users[0]
@@ -803,7 +807,8 @@ console.log(fruits.join('/')) // 'Apple/Banana/Cherry'
 ### .map()
 
 대상 배열의 길이만큼 주어진 콜백을 실행하고,  
-콜백의 반환 값을 모아 새로운 배열을 반환합니다.
+콜백의 반환 값을 모아 새로운 배열을 반환합니다.  
+map: 반복하다.
 
 ```js
 const numbers = [1, 2, 3, 4]
@@ -830,7 +835,7 @@ console.log(newUsers)
 ### .pop()
 
 대상 배열에서 마지막 요소를 제거하고 그 요소를 반환합니다.  
-대상 배열 원본이 변경됩니다.
+대상 배열 원본이 변경됩니다. (주의!)
 
 ```js
 const fruits = ['Apple', 'Banana', 'Cherry']
@@ -839,10 +844,10 @@ console.log(fruits.pop()) // 'Cherry'
 console.log(fruits) // ['Apple', 'Banana']
 ```
 
-### .push()
+### .push() ※사용 빈도 多
 
 대상 배열의 마지막에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.  
-대상 배열 원본이 변경됩니다.
+대상 배열 원본이 변경됩니다. (주의!)
 
 ```js
 const fruits = ['Apple', 'Banana', 'Cherry']
@@ -865,9 +870,15 @@ console.log(fruits)
 const numbers = [1, 2, 3]
 
 // const result = numbers.reduce((acc, cur) => acc + cur, 0)
-const result = numbers.reduce((accumulator, currentValue) => {
+const result = numbers.reduce
+
+// accmulator : 누적
+((accumulator, currentValue) => {
   return accumulator + currentValue
 }, 0)
+// 0 + 1
+// 1 + 2
+// 3 + 3
 
 console.log(result) // 6
 ```
@@ -897,7 +908,7 @@ console.log(names) // 'Neo, Amy, Lewis'
 ### .reverse()
 
 대상 배열의 순서를 반전합니다.  
-대상 배열 원본이 변경됩니다.
+대상 배열 원본이 변경됩니다. (주의!)
 
 ```js
 const arr = ['A', 'B', 'C']
