@@ -967,7 +967,7 @@ console.log(isValid) // true
 
 대상 배열을 콜백의 반환 값에 따라 정렬합니다.  
 콜백을 제공하지 않으면, 요소를 문자열로 변환하고 유니코드 코드 포인트 순서로 정렬합니다.  
-대상 배열 원본이 변경됩니다.
+대상 배열 원본이 변경됩니다. (주의!)
 
 **콜백의 반환 값:**
 - 음수: `a`를 낮은 순서로 정렬
@@ -1001,15 +1001,16 @@ console.log(users) // [ Lewis객체, Amy객체, Neo객체 ]
 // console.log(users) // [ Neo객체, Amy객체, Lewis객체 ]
 ```
 
-### .splice()
+### .splice() ※중요!
 
 대상 배열에 요소를 추가하거나 삭제하거나 교체합니다.  
-대상 배열 원본이 변경됩니다.
+대상 배열 원본이 변경됩니다. (주의!)
 
 요소 추가
 
 ```js
 const arr = ['A', 'B', 'C']
+// splice(index 값, 몇 개의 요소를 제거할 것인지, 추가할 요소)
 arr.splice(2, 0, 'X')
 
 console.log(arr) // ['A', 'B', 'X', 'C']
@@ -1055,10 +1056,14 @@ console.log(arr) // ['X', 'A', 'B', 'C']
 ```
 
 ### Array.from()
+> 정적 메소드 : 클래스에 붙여서 사용
+> 프로토타입 메소드 : 데이터에 붙여서 사용
 
 유사 배열(Array-like)을 실제 배열로 반환합니다.
 
 ```js
+
+// 배열로 바꾸려면 프로퍼티 이름은 숫자, length를 명시해 주어야 함
 const arraylike = {
   0: 'A',
   1: 'B',
@@ -1066,6 +1071,7 @@ const arraylike = {
   length: 3
 }
 
+// constructor: 인스턴스의 실제 데이터 확인 가능
 console.log(arraylike.constructor === Array) // false
 console.log(arraylike.constructor === Object) // true
 
@@ -1096,8 +1102,9 @@ console.log(Array.isArray(arraylike)) // false
 
 ---
 ## Object
+> 객체 데이터는 대부분 '정적' 메소드
 
-### Object.assign()
+### Object.assign() ※ 매우 중요!
 
 하나 이상의 출처(Source) 객체로부터 대상(Target) 객체로 속성을 복사하고 대상 객체를 반환합니다.
 
@@ -1105,8 +1112,13 @@ console.log(Array.isArray(arraylike)) // false
 const target = { a: 1, b: 2 }
 const source1 = { b: 3, c: 4 }
 const source2 = { c: 5, d: 6 }
+
+// const result = target
+// 최소 두 개 이상 들어가야 함
+// target(첫 번째 인수 객체)으로 모두 병합됨
 const result = Object.assign(target, source1, source2)
 
+// 객체 데이터에서 속성의 이름은 고유함
 console.log(target) // { a: 1, b: 3, c: 5, d: 6 }
 console.log(result) // { a: 1, b: 3, c: 5, d: 6 }
 ```
@@ -1117,8 +1129,12 @@ console.log(result) // { a: 1, b: 3, c: 5, d: 6 }
 const target = { a: 1, b: 2 }
 const source1 = { b: 3, c: 4 }
 const source2 = { c: 5, d: 6 }
+
+// 익명 함수는 재활용이 불가능
+// 데이터를 재활용 하려면 이름이 부여되어야 함
 const result = Object.assign({}, target, source1, source2)
 
+// 원본이 변경되지 않음
 console.log(target) // { a: 1, b: 2 }
 console.log(result) // { a: 1, b: 3, c: 5, d: 6 }
 ```
@@ -1141,7 +1157,7 @@ console.log(result) // { a: 1, b: 3, c: 5, d: 6 }
 
 ### Object.entries()
 
-주어진 객체의 각 속성과 값으로 하나의 배열 만들어 요소로 추가한 2차원 배열을 반환합니다.
+주어진 객체의 각 속성과 값으로 하나의 배열을 만들어 요소로 추가한 2차원 배열을 반환합니다.
 
 ```js
 const user = {
@@ -1261,6 +1277,7 @@ console.log(Object.isSealed(user)) // true
 
 ```js
 const user = {}
+// defineProperty(객체 데이터 이름, 속성의 이름, 값)
 Object.defineProperty(user, 'name', {
   value: 'Heropy'
 })
@@ -1306,6 +1323,7 @@ console.log(user.name) // undefined
 
 ```js
 const user = {
+  // _ : 조회는 가능하나 사용 지양
   _name: 'Heropy'
 }
 Object.defineProperty(user, 'name', {
@@ -1318,10 +1336,10 @@ Object.defineProperty(user, 'name', {
   }
 })
 
-// Get!
+// Get : 값을 조회할 때 동작하는 함수
 console.log(user.name) // 'Heropy'
 
-// Set!
+// Set : 값을 지정했을 때 동작하는 함수
 user.name = 'Neo' // '이름이 Neo로 바뀌었습니다!'
 
 for (let key in user) {
@@ -1372,7 +1390,7 @@ JSON(JavaScript Object Notation)는 데이터 전달을 위한 표준 데이터 
 
 - 문자, 숫자, 불린, Null, 객체, 배열만 사용
 - 문자는 큰 따옴표만 사용
-- 후행 쉼표 사용 불가
+- 후행 쉼표 사용 불가(,)
 - `.json` 확장자 사용
 
 ### .stringify()
@@ -1381,6 +1399,7 @@ JavaScript 데이터를 JSON 문자로 변환합니다.
 
 ```js
 console.log(JSON.stringify('Hello world!')) // '"Hello world!"'
+// json의 문자는 큰 따옴표
 console.log(JSON.stringify(123)) // '123'
 console.log(JSON.stringify(false)) // 'false'
 console.log(JSON.stringify(null)) // 'null'
