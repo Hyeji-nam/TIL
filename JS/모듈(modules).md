@@ -53,7 +53,7 @@ export {
 ```
 
 ## 가져오기(Imports)
-
+> import 키워드는 파일의 최상단에 작성해야함!
 ```js
 import 기본데이터, { 이름데이터1, 이름데이터2 } from '경로'
 ```
@@ -71,7 +71,7 @@ import {
 import * as myName from './myModule.js'
 ```
 
-> `*`는 와이드카드 문자(wildcard character)로 여러 개를 한 번에 지정한다는 의미의 기호입니다.
+> `*`는 와일드카드 문자(wildcard character)로 여러 개를 한 번에 지정한다는 의미의 기호입니다.
 
 ### 동적 모듈 가져오기
 
