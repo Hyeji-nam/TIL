@@ -312,6 +312,7 @@ wrap()
 
 ## Resolve, Reject 그리고 에러 핸들링
 
+> resoleve 혹은 reject 하나만 실행됩니다.
 ```js
 const delayAdd = (index, cb, errorCb) => {
   setTimeout(() => {
@@ -347,8 +348,8 @@ const delayAdd = index => {
 
 // .then()
 delayAdd(11)
-  .then(res => console.log(res))
-  .catch(err => console.error(err))
+  .then(res => console.log(res)) // 약속을 이행했을 때 동작
+  .catch(err => console.error(err)) // 문제가 발생했을 때 동작
   .finally(() => console.log('Done!'))
 
 // async / await
